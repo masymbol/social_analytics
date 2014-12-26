@@ -1,0 +1,33 @@
+library(rmongodb)
+library(plyr)
+
+mongo <- mongo.create("localhost")
+databases <-  mongo.get.databases(mongo)
+collections <-  mongo.get.database.collections(mongo, "naga")
+collection <- "Facebook"
+namespace <- paste(db, collection, sep=".")
+
+buf <- mongo.bson.buffer.create()
+query <- mongo.bson.from.buffer(buf)
+fields = mongo.bson.buffer.create()
+mongo.bson.buffer.append(fields, "facebook.message", 1L)
+mongo.bson.buffer.append(fields, "_id", 0L)
+mongo.bson.buffer.append(fields, "facebook.created_at", 2L)
+mongo.bson.buffer.append(fields, "facebook.id", 3L)
+mongo.bson.buffer.append(fields, "facebook.link", 4L)
+mongo.bson.buffer.append(fields, "facebook.name", 5L)
+mongo.bson.buffer.append(fields, "facebook.picture", 6L)
+mongo.bson.buffer.append(fields, "language.tag", 7L)
+fields = mongo.bson.from.buffer(fields)
+cursor = mongo.find(mongo, namespace, query = query, fields = fields)
+
+gids = data.frame(stringsAsFactors = FALSE)
+while (mongo.cursor.next(cursor)) {
+    # iterate and grab the next record
+    tmp = mongo.bson.to.list(mongo.cursor.value(cursor))
+    # make it a dataframe
+    tmp.df = as.data.frame(t(unlist(tmp)), stringsAsFactors = F)
+    # bind to the master dataframe
+    gids = rbind.fill(gids, tmp.df)
+}
+View(gids)
