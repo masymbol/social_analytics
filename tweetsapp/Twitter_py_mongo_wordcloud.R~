@@ -1,0 +1,102 @@
+ library(methods)
+ library(RColorBrewer)
+ library(NLP)
+ library(tm)
+ library(wordcloud)
+ library(rmongodb)
+ library(jsonlite)
+ library(plyr)
+
+ m = mongo.create(host = "localhost")
+ mongo.is.connected(m)
+ mongo.get.databases(m)
+ db <- "analytics"
+
+ collection <- "rajinikanth"
+ namespace <- paste(db, collection, sep=".") 
+
+ query = mongo.bson.buffer.create()
+# when complete, make object from buffer
+query = mongo.bson.from.buffer(query)
+
+# define the fields
+fields = mongo.bson.buffer.create()
+mongo.bson.buffer.append(fields, "text", 1L)
+
+# when complete, make object from buffer
+fields = mongo.bson.from.buffer(fields)
+
+# create the cursor
+cursor = mongo.find(m, ns = namespace, query = query, fields = fields)
+
+gids = data.frame(stringsAsFactors = FALSE)
+while (mongo.cursor.next(cursor)) {
+  # iterate and grab the next record
+  tmp = mongo.bson.to.list(mongo.cursor.value(cursor))
+  # make it a dataframe
+  tmp.df = as.data.frame(t(unlist(tmp)), stringsAsFactors = F)
+  # bind to the master dataframe
+  gids = rbind.fill(gids, tmp.df)
+}
+
+ t <-gids$text
+  
+  clean.text <- function(some_txt)
+ {
+  some_txt = gsub("&amp", "", some_txt)
+  
+  some_txt = gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", some_txt)
+  
+  some_txt = gsub("@\\w+", "", some_txt)
+  
+  some_txt = gsub("[[:punct:]]", "", some_txt)
+  
+  some_txt = gsub("[[:digit:]]", "", some_txt)
+  
+  some_txt = gsub("http\\w+", "", some_txt)
+  
+  some_txt = gsub("[ \t]{2,}", "", some_txt)
+  
+  some_txt = gsub("^\\s+|\\s+$", "", some_txt)
+
+  some_txt = gsub('\b', '',some_txt)
+  
+  some_txt = iconv(some_txt, "latin1", "ASCII", sub="")
+  
+  
+  # define "tolower error handling" function
+  
+  try.tolower = function(x)
+    
+  {
+   y = NA
+    
+    try_error = tryCatch(tolower(x), error=function(e) e)
+    
+    if (!inherits(try_error, "error"))
+    y = tolower(x)
+  return(y)
+  }
+  some_txt = sapply(some_txt, try.tolower)
+  some_txt = some_txt[some_txt != ""]
+  names(some_txt) = NULL
+  return(some_txt)
+ }
+
+ clean_text = clean.text(t)
+ tweet_corpus = Corpus(VectorSource(clean_text))
+ tdm = TermDocumentMatrix(tweet_corpus, control = list(removePunctuation = TRUE,stopwords = c("machine", "learning", stopwords("english")), removeNumbers = TRUE, tolower = TRUE))
+
+ mt = as.matrix(tdm) #we define tdm as matrix
+
+ word_freqs = sort(rowSums(mt), decreasing=TRUE)   #now we get the word orders in decreasing order
+
+ dm = data.frame(word=names(word_freqs), freq=word_freqs)    #we create our data set
+ 
+ collection1 <- "wordcloud"
+ namespace1 <- paste(db, collection1, sep=".") 
+ tw_json <- toJSON(dm)
+ tw_bson <- mongo.bson.from.JSON(tw_json)
+ tw_data <- mongo.insert(m, namespace1, tw_bson)
+ print("Finished")
+

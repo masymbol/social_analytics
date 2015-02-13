@@ -1,0 +1,203 @@
+#searchinput {
+font-style: normal;
+border-radius: 3px;
+font-family: 'Arimo', arial, serif;
+font-weight: normal;
+line-height: 25px;
+font-size: 24px;
+color: #999;
+width: 621px;
+position: relative;
+height: 32px;
+padding: 15px;
+}
+
+#searchbtn {
+background-color: #5bb75b;
+font-size: 22px;
+padding: 3px;
+}
+
+
+a {
+  color: #00B7FF;
+}
+.alerterror, .alertsuccess, .alertinfo{
+	margin:0 auto; 
+	width:auto; 
+	padding: 10px 10px;
+	text-align:center;
+	margin-left: 40px;
+	
+}
+
+.alerterror, .alertsuccess{
+	background-color:red;
+}
+.alertsuccess{
+	background-color:green;
+}
+.alertinfo{
+	background-color:#FAA937;
+}
+
+#recent_users img, #most_influencers img{
+	border: 2px solid black;
+	margin: 2px;
+}
+
+/* Styles for preview page */
+
+#recent_users img, #most_influencers img{
+	border: 2px solid black;
+	margin: 2px;
+}
+#some_negatives-list-group, #some-pos-list-group{
+	max-height:322px;
+	overflow: scroll;
+}
+
+#posts-list-group{
+	max-height:260px;
+	overflow: scroll;
+}
+
+/* Styles for Posts */
+span.single-row {
+display: table;
+width: 100%;
+}
+
+span.single-row span.new-social-google-plus, span.single-row span.new-social-twitter{
+	display: table-cell;
+	width:10%;
+}
+
+span.single-row span.top-post-text{
+	display: table-cell;
+	width:50%;
+
+}
+
+span.single-row span.retweet_count{
+	display: table-cell;
+	width:4%;
+
+}
+
+span.top-post-source, span.social-icons{
+	padding-right: 10px;
+}
+
+/*styles for social icons colors */
+span.new-social-google-plus{
+	color:red;
+}
+span.new-social-twitter{
+	color: #4D94FF;
+}
+
+/* Timeline css */
+text.shadow {
+  stroke: #fff;
+  stroke-width: 2.5px;
+  opacity: 0.9;
+}
+
+path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.grid .tick {
+    stroke: lightgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+.grid path {
+  stroke-width: 0;
+}
+
+.area {
+  fill: lightsteelblue;
+  stroke-width: 0;
+}
+
+#world_map path {
+	stroke: white;
+	stroke-width: 0.25px;
+	fill: grey;
+}
+
+.search-container > span.error{
+	color:red;
+}
+
+.topics_heading{
+	font-size: 20px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+span.retweet_count strong{
+  background-color: #999;
+  border-radius: 10px;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 10px;
+  padding: 3px 7px;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+
+}
+
+/* Ajax Loader styles */
+#wait{
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	background-color: silver;
+	background: rgba( 255, 255, 255, .3 ) url('/images/Loading-Trace-wide.gif') 50% 50% no-repeat;
+}
+
+#most_influencers img#loading_image{
+	border:none;
+}
+
+/* File exist search css */
+#loaderDiv {
+	float: right;
+	height: 100%;
+	left: 50%;
+	right: 0;
+	top: 50%;
+	width: 100%;
+}
+
+#loaderDiv img{	
+	left: 25%;
+	position: relative;
+	right: 0;
+	top: 50%;
+}
+
+#recent_users img, #most_influencers img{
+	height: 75px;
+	width: 76px;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "customer_experience",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "~0.0.3",
+    "body-parser": "~1.6.6",
+    "cookie-parser": "~1.3.2",
+    "cron": "^1.0.5",
+    "debug": "~1.0.4",
+    "express": "~4.8.6",
+    "express-session": "~1.6.5",
+    "mongoose": "~3.8.12",
+    "mongoose-unique-validator": "~0.3.0",
+    "morgan": "~1.2.3",
+    "path": "*",
+    "serve-favicon": "~2.0.1",
+    "time": "^0.11.0"
+  }
+}

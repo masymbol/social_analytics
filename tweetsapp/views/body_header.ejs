@@ -1,0 +1,58 @@
+<div class="row">
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-default">
+			<div class="stat_box">
+				<div class="stat_ico color_f"><i class="ion-ios7-chatboxes-outline"></i></div>
+				<div class="stat_content">
+					<span class="stat_count">2000</span>
+					<span class="stat_name">No of Records</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-default" style="min-height: 88px;">
+			<div class="stat_box">
+				<div class="stat_ico color_g"><i class="ion-android-social"></i></div>
+				<div class="stat_content">
+					<i class="fa fa-twitter"></i>
+					<span class="stat_name">Sources of Result</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-default" style="min-height: 88px;">
+			<div class="stat_box">
+				<div class="stat_ico color_a"><i class="ion-android-search"></i></div>
+				<div class="stat_content">
+					<span class="stat_count">
+					<% if (keyword != undefined) { %>
+							<%= keyword %>
+						<% } %>
+					</span>
+					<span class="stat_name" title='<u>test link</u>'>Analysis Query</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-default" style="min-height: 88px;">
+			<div class="stat_content">
+				<div class="stat_box">
+					<form method="POST" action="/preview">
+						<div class="input-group search-container">
+							<input class="form-control" name="search" id="search-text" type="text" placeholder = "Enter a search text">
+							<span class="input-group-btn">
+								<input id="btn_search_submit" value="Search" class="btn btn-primary search_btn_click" type="submit" data-toggle="modal" data-target="#bs_modal_regular" title = "Enter your search item title" name = "Enter your search item name"></input>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

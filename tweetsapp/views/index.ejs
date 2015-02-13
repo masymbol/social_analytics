@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title><%= title %></title>
+		<% include head %>
+		<style type="text/css">
+			.alerterror, .alertsuccess, .alertinfo {
+				width: auto;
+				padding: 10px 10px;
+				text-align: center;
+				background-color: #c0392b;
+				margin: 5px 0 10px;
+			}
+			button.close {
+				margin: -40px 10px 0 0;
+			}
+			.error{
+				color:red;
+			}
+			
+			.vertical-center {
+				min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+				min-height: 90vh; /* These two lines are counted as one :-)       */
+
+				display: flex;
+				align-items: center;
+			}
+
+			.modal-body button.close {
+				margin: 0;
+			}
+
+			.alertsuccess {
+				background-color:green;
+			}
+
+		</style>
+		<!-- Login stylesheet -->
+		<link href="stylesheets/login.css" rel="stylesheet" media="screen">
+	</head>
+	<body>
+		<!-- top bar -->
+		<% include header_content %>
+		<!-- main content -->
+
+			<div class="login_container vertical-center">
+			<!--<div id="wait" style="display: none;" ></div>-->
+				<div class="panel panel-default" style="margin-top: 10px;">
+					<div class="panel-body search-container">
+						<div class="col-md-12">
+							<div class="heading_b topics_heading">Analysis Query</div>
+							<p><b>Desription:</b> Type your desired keyword or search term to get trends in social media.</p>
+							<form method="POST" action="/preview">
+								<div class="input-group search-container">
+									<input class="form-control" name="search" id="search-text" type="text" placeholder = "Enter a search text">
+									<span class="input-group-btn">
+										<input id="btn_search_submit" value="Search" class="btn btn-primary" type="submit" data-toggle="modal" data-target="#bs_modal_regular"></input>
+									</span>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+
+		<!-- side navigation -->
+		<% include side_navigation %>
+
+		<!-- bootstrap js plugins -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<!-- top dropdown navigation -->
+		<script src="assets/js/tinynav.js"></script>		
+	
+		<!-- style switcher -->
+		<script src="assets/js/tisa_style_switcher.js"></script>
+
+		<script type="text/javascript">
+		$(function() {
+			$('button.close').on("click", function(){
+				$(this).hide();
+			$('div.alerterror').hide();
+			});
+		})
+		</script>
+		
+	</body>
+</html>

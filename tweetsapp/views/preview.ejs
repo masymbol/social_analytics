@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+			<meta charset="UTF-8">
+			<title><%= title %></title>
+			<% include head %>
+
+			<!-- Load c3.css -->
+			<link href="stylesheets/c3.css" rel="stylesheet" type="text/css">
+
+			<!-- Load d3.js and c3.js -->
+			<script src="javascripts/d3.min.js"></script>
+			<script src="javascripts/c3.min.js"></script>
+			<script type="text/javascript" src="javascripts/jquery-csv.js"></script>
+			<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+			<style type="text/css">
+			.alerterror, .alertsuccess, .alertinfo {
+				width: auto;
+				padding: 10px 10px;
+				text-align: center;
+				background-color: #c0392b;
+				margin: 5px 0 10px;
+			}
+			button.close {
+				margin: -40px 10px 0 0;
+			}
+
+			.error{
+				color:red;
+			}
+
+			.modal-body button.close {
+				margin: 0;
+			}
+
+			.alertsuccess {
+				background-color:green;
+			}
+			
+		</style>
+
+    </head>
+    
+	<body >
+		<!-- top bar -->
+		<% include header_content %>
+		
+		<!-- main content -->
+		<div id="main_wrapper">
+			<div class="page_content">
+				<div class="container-fluid">
+					<!--<div id="wait" style="display: none;" ></div>-->
+
+					<% include body_header %>
+					
+					<div class="row">
+						<% include tweets %>
+					</div>					
+				</div>
+			</div>
+		</div>
+
+		<!-- side navigation -->
+		<% include side_navigation %>
+
+		<!-- bootstrap js plugins -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<!-- top dropdown navigation -->
+		<script src="assets/js/tinynav.js"></script>		
+	
+		<!-- style switcher -->
+		<script src="assets/js/tisa_style_switcher.js"></script>
+
+		<script type="text/javascript">
+		$(function() {
+			$('button.close').on("click", function(){
+				$(this).hide();
+		    $('div.alerterror').hide();
+		  });
+		  $('.modal-body button.close').on("click", function(){
+				$(this).show();
+		  });
+
+		  //showModelBox();
+
+		  function showModelBox(){
+		  	$(".search_btn_click").trigger( "click" );
+		  }
+
+		})
+		</script>
+		
+    </body>
+</html>
